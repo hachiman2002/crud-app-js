@@ -64,6 +64,7 @@ export const renderModal = (element, callback) =>{
 
         const formData = new FormData(form);
         const userLike = {...loadedUser};
+        const isActive = document.querySelector("#is-active").checked;
 
         for(const [key, value] of formData){
             if(key === 'balance'){
@@ -76,7 +77,11 @@ export const renderModal = (element, callback) =>{
                 continue;
             }
 
-            userLike[key]=value;
+            if(!isActive){
+                userLike['isActive']=false;
+                continue;
+            }
+            
         }
         console.log(userLike);
         await callback(userLike)
